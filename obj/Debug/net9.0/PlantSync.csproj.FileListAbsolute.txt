@@ -23,7 +23,6 @@
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/scopedcss/Pages/Shared/_Layout.cshtml.rz.scp.css
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/scopedcss/bundle/PlantSync.styles.css
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/scopedcss/projectbundle/PlantSync.bundle.scp.css
-/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-lugek5hnai.gz
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/ft8x5ug6nb-61n19gt1b8.gz
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/kebojr4dh2-fr7q2aak1r.gz
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/md9hvciqiz-bqjiyaj88i.gz
@@ -102,3 +101,4 @@
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/PlantSync.pdb
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/PlantSync.genruntimeconfig.cache
 /run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/ref/PlantSync.dll
+/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-suipyobm6f.gz

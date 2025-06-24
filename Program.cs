@@ -27,10 +27,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseHttpsRedirection();
-app.UseStaticFiles(); // Fixed: Replaced MapStaticAssets() with UseStaticFiles()
+app.UseStaticFiles(); 
 app.UseRouting();
 app.UseAuthorization();
 
-app.MapRazorPages(); // Removed WithStaticAssets() - not needed in most cases
+app.MapRazorPages();
 
 app.Run();

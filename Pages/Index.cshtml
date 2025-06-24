@@ -1,230 +1,23 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.EntityFrameworkCore
+@using Pomelo.EntityFrameworkCore.MySql
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Summit Power Limited - Barishal Power Plant";
 }
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summit Power Limited - Barishal Power Plant</title>
+    <title>@ViewData["Title"]</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #1a3a6c;
-            --secondary: #2c5282;
-            --accent: #e63946;
-            --success: #2d9d78;
-            --warning: #e9b949;
-            --light-bg: #f8f9fa;
-        }
-        
-        body {
-            background-color: #f0f2f5;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .dashboard-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.5rem 0;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: none;
-            height: 100%;
-            padding: 1.5rem;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-        
-        .stat-card i {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .stat-card .number {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-        
-        .card-header {
-            background-color: white;
-            border-bottom: 1px solid #e0e0e0;
-            font-weight: 600;
-            padding: 1rem 1.25rem;
-            border-radius: 10px 10px 0 0 !important;
-        }
-        
-        .equipment-card {
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-        
-        .equipment-card:hover {
-            transform: translateY(-3px);
-            border-left-color: var(--accent);
-        }
-        
-        .status-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .status-operational {
-            background-color: #e1fcef;
-            color: var(--success);
-        }
-        
-        .status-maintenance {
-            background-color: #fff8e1;
-            color: var(--warning);
-        }
-        
-        .status-critical {
-            background-color: #ffebee;
-            color: var(--accent);
-        }
-        
-        .alert-item {
-            padding: 1rem;
-            border-left: 3px solid var(--accent);
-            background-color: #fff8f8;
-            margin-bottom: 0.75rem;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        .maintenance-item {
-            padding: 1rem;
-            border-left: 3px solid var(--success);
-            background-color: #f8fff8;
-            margin-bottom: 0.75rem;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        .search-container {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-        
-        .search-container i {
-            position: absolute;
-            left: 15px;
-            top: 12px;
-            color: #6c757d;
-        }
-        
-        .search-container input {
-            padding-left: 40px;
-            border-radius: 30px;
-            border: 1px solid #dee2e6;
-            height: 46px;
-        }
-        
-        .action-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .tab-content {
-            padding-top: 1.5rem;
-        }
-        
-        .nav-tabs .nav-link {
-            border: none;
-            color: #495057;
-            font-weight: 500;
-            padding: 0.75rem 1.25rem;
-        }
-        
-        .nav-tabs .nav-link.active {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
-            background: transparent;
-        }
-        
-        .value-display {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-        
-        .progress {
-            height: 8px;
-            border-radius: 4px;
-        }
-        
-        .section-title {
-            position: relative;
-            padding-left: 15px;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .section-title:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 5px;
-            height: 80%;
-            background-color: var(--primary);
-            border-radius: 3px;
-        }
-        
-        .modal-content {
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .modal-header {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .btn-close-white {
-            filter: invert(1);
-        }
-    </style>
+    
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary);">
@@ -235,13 +28,16 @@
             <div class="d-flex align-items-center">
                 <span class="badge bg-light text-dark me-3">Barishal Power Plant</span>
                 <div class="dropdown">
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown"
+                        data-bs-toggle="dropdown">
                         <i class="fas fa-user-circle me-1"></i> Plant Manager
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
                     </ul>
                 </div>
@@ -252,8 +48,8 @@
     <!-- Dashboard Header -->
     <div class="dashboard-header">
         <div class="container">
-            <h1 class="mb-1">Inventory Management System</h1>
-            <p class="mb-0">Real-time monitoring of critical equipment and inventory</p>
+            <h1 class="mb-1">GridPulse Management Suite</h1>
+            <p class="mb-0">Keeping your power systems alive, organized, and efficient</p>
         </div>
     </div>
 
@@ -263,44 +59,60 @@
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card text-center p-4">
                     <i class="fas fa-boxes"></i>
-                    <div class="number" id="totalItems">6</div>
+                    <div class="number">@Model.EquipmentList.Count</div>
                     <div class="text-muted">Active inventory items</div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card text-center p-4">
                     <i class="fas fa-check-circle"></i>
-                    <div class="number" id="operationalCount">4</div>
+                    <div class="number">@Model.EquipmentList.Count(e => e.Status == "operational")</div>
                     <div class="text-muted">Equipment ready</div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card text-center p-4">
                     <i class="fas fa-exclamation-triangle"></i>
-                    <div class="number" id="criticalCount">4</div>
+                    <div class="number">@Model.EquipmentList.Count(e => e.Status == "critical")</div>
                     <div class="text-muted">Need attention</div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card text-center p-4">
                     <i class="fas fa-dollar-sign"></i>
-                    <div class="number" id="totalValue">$31.1M</div>
+                    <div class="number">$@Model.TotalValue.ToString("0.0")M</div>
                     <div class="text-muted">Asset value</div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Notification Toast -->
+    <div class="toast-container">
+        <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto"><i class="fas fa-check-circle me-2"></i> Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                Operation completed successfully.
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <div class="container pb-5">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="equipment-tab" data-bs-toggle="tab" data-bs-target="#equipment" type="button">
+                <button class="nav-link active" id="equipment-tab" data-bs-toggle="tab" data-bs-target="#equipment"
+                    type="button">
                     <i class="fas fa-cogs me-1"></i> Equipment & Inventory
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="maintenance-tab" data-bs-toggle="tab" data-bs-target="#maintenance" type="button">
+                <button class="nav-link" id="maintenance-tab" data-bs-toggle="tab" data-bs-target="#maintenance"
+                    type="button">
                     <i class="fas fa-calendar-alt me-1"></i> Maintenance Schedule
                 </button>
             </li>
@@ -310,7 +122,7 @@
                 </button>
             </li>
         </ul>
-        
+
         <div class="tab-content" id="myTabContent">
             <!-- Equipment Tab -->
             <div class="tab-pane fade show active" id="equipment" role="tabpanel">
@@ -337,14 +149,76 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <h4 class="section-title">Equipment List</h4>
-                
+
                 <div class="row" id="equipmentGrid">
-                    <!-- Equipment cards will be populated here by JavaScript -->
+                    @foreach (var item in Model.EquipmentList)
+                    {
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card equipment-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h5 class="card-title mb-0">@item.Name</h5>
+                                        <span class="status-badge status-@item.Status">@item.Status</span>
+                                    </div>
+                                    <p class="card-text text-muted mb-2"><strong>ID:</strong> @item.Id</p>
+                                    <p class="card-text mb-2"><strong>Category:</strong> @item.Type</p>
+                                    <p class="card-text mb-2"><strong>Location:</strong> @item.Location</p>
+                                    <p class="card-text mb-2"><strong>Quantity:</strong> @item.Quantity</p>
+                                    <p class="card-text mb-3"><strong>Value:</strong> $@item.Value.ToString("N0")</p>
+                                    <p class="card-text mb-1"><strong>Installed:</strong>
+                                        @item.InstalledDate.ToString("yyyy-MM-dd")</p>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-2 mt-3">
+                                        <small class="text-muted">Condition</small>
+                                        <small>@item.Conditions%</small>
+                                    </div>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar"
+                                            style="width: @item.Conditions%; background-color: @GetConditionColor(item.Conditions)"
+                                            aria-valuenow="@item.Conditions" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                            data-bs-target="#detailModal"
+                                            onclick="showDetail('@item.Id', '@item.Name', '@item.Type', '@item.Location', '@item.Quantity', '@item.Value', '@item.Conditions', '@item.InstalledDate.ToString("yyyy-MM-dd")')">
+                                            <i class="fas fa-info-circle me-1"></i> Details
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
+                                            data-bs-target="#editModal"
+                                            onclick="loadEditForm('@item.Id', '@item.Name', '@item.Type', '@item.Location', '@item.Quantity', '@item.Value', '@item.Conditions', '@item.Status', '@item.InstalledDate.ToString("yyyy-MM-dd")')">
+                                            <i class="fas fa-edit me-1"></i> Edit
+                                        </button>
+                                        <form method="post" asp-page-handler="Delete">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                onclick="return confirm('Are you sure you want to delete this equipment?');">
+                                                <i class="fas fa-trash-alt me-1"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (!Model.EquipmentList.Any())
+                    {
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                            <h4>No equipment found</h4>
+                            <p class="text-muted">Add new equipment to get started</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                                <i class="fas fa-plus me-1"></i> Add Equipment
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
-            
+
             <!-- Maintenance Tab -->
             <div class="tab-pane fade" id="maintenance" role="tabpanel">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -355,17 +229,70 @@
                         </button>
                     </div>
                 </div>
-                <p class="text-muted mb-4">Track maintenance activities and schedules for all equipment</p>
-                
+
+                <p class="text-muted mb-4">
+                    Track maintenance activities and schedules for all equipment
+                </p>
+
                 <div class="card">
                     <div class="card-body">
                         <div class="maintenance-schedule" id="maintenanceList">
-                            <!-- Maintenance items will be populated here by JavaScript -->
+                            @foreach (var item in Model.MaintenanceSchedules)
+                            {
+                                <div class="maintenance-item mb-3 p-3 border rounded">
+                                    <h5>@(item.Equipment != null ? item.Equipment.Name : "Unknown Equipment")</h5>
+                                    <p>
+                                        <strong>Next Maintenance:</strong> @item.NextMaintenanceDate.ToString("yyyy-MM-dd")
+                                    </p>
+                                    @if (!string.IsNullOrEmpty(item.Notes))
+                                    {
+                                        <p><strong>Notes:</strong> @item.Notes</p>
+                                    }
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-            
+
+
+            <!-- Add Maintenance Modal -->
+            <div class="modal fade" id="addMaintenanceModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="post" asp-page-handler="AddMaintenance">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Schedule New Maintenance</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label asp-for="NewMaintenance.EquipmentId" class="form-label">Equipment</label>
+                                    <select asp-for="NewMaintenance.EquipmentId" class="form-select"
+                                        asp-items="@(new SelectList(Model.EquipmentList, "Id", "Name"))">
+                                        <option value="">Select Equipment</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="NewMaintenance.NextMaintenanceDate" class="form-label">Next
+                                        Maintenance Date</label>
+                                    <input asp-for="NewMaintenance.NextMaintenanceDate" type="date"
+                                        class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <!-- Alerts Tab -->
             <div class="tab-pane fade" id="alerts" role="tabpanel">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -377,11 +304,51 @@
                     </div>
                 </div>
                 <p class="text-muted mb-4">Items requiring immediate attention</p>
-                
+
                 <div class="card">
                     <div class="card-body">
-                        <div class="alert-list" id="alertList">
-                            <!-- Alert items will be populated here by JavaScript -->
+                        <div class="alert-list">
+                            <div class="alert-item">
+                                <h5>Gas Turbine Generator Unit 1</h5>
+                                <p>Low stock: 1 unit (Critical: 1)</p>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="alert1">
+                                        <label class="form-check-label" for="alert1">
+                                            Mark as resolved
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-danger me-2">
+                                            <i class="fas fa-bell me-1"></i> Notify Team
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-file-alt me-1"></i> Create Order
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert-item">
+                                <h5>Steam Turbine Unit 2</h5>
+                                <p>Low stock: 1 unit (Critical: 1)</p>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="alert2">
+                                        <label class="form-check-label" for="alert2">
+                                            Mark as resolved
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-danger me-2">
+                                            <i class="fas fa-bell me-1"></i> Notify Team
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-file-alt me-1"></i> Create Order
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -390,46 +357,47 @@
     </div>
 
     <!-- Floating Action Button -->
-    <button class="action-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEquipmentModal">
+    <button class="action-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
         <i class="fas fa-plus"></i>
     </button>
 
-    <!-- Add Equipment Modal -->
-    <div class="modal fade" id="addEquipmentModal" tabindex="-1" aria-hidden="true">
+    <!-- Create Equipment Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title">Add New Equipment</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="equipmentForm">
+                <form method="post" asp-page-handler="Create">
+                    <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Equipment Name</label>
-                                    <input type="text" class="form-control" required>
+                                    <label asp-for="Equipment.Name" class="form-label">Equipment Name</label>
+                                    <input asp-for="Equipment.Name" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Equipment ID</label>
-                                    <input type="text" class="form-control" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Category</label>
-                                    <select class="form-select" required>
-                                        <option value="">Select Category</option>
-                                        <option>Generation</option>
-                                        <option>Cooling System</option>
-                                        <option>Electrical</option>
-                                        <option>Chemicals</option>
-                                        <option>Spare Parts</option>
+                                    <label asp-for="Equipment.Type" class="form-label">Equipment Type</label>
+                                    <select asp-for="Equipment.Type" class="form-select" required>
+                                        <option value="">Select Type</option>
+                                        <option>Generator</option>
+                                        <option>Transformer</option>
+                                        <option>Turbine</option>
+                                        <option>Switchgear</option>
+                                        <option>Other</option>
                                     </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Location" class="form-label">Location</label>
+                                    <input asp-for="Equipment.Location" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Status</label>
-                                    <select class="form-select" required>
+                                    <label asp-for="Equipment.Status" class="form-label">Status</label>
+                                    <select asp-for="Equipment.Status" class="form-select" required>
                                         <option value="">Select Status</option>
                                         <option value="operational">Operational</option>
                                         <option value="maintenance">Maintenance</option>
@@ -437,125 +405,158 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Location</label>
-                                    <input type="text" class="form-control" required>
+                                    <label asp-for="Equipment.Quantity" class="form-label">Quantity</label>
+                                    <input asp-for="Equipment.Quantity" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Quantity</label>
-                                    <input type="text" class="form-control" required>
+                                    <label asp-for="Equipment.Value" class="form-label">Value ($)</label>
+                                    <input asp-for="Equipment.Value" type="number" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Value ($)</label>
-                                    <input type="number" class="form-control" required>
+                                    <label asp-for="Equipment.Conditions" class="form-label">Condition (%)</label>
+                                    <input asp-for="Equipment.Conditions" type="number" min="0" max="100"
+                                        class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label">Next Maintenance Date</label>
-                                    <input type="date" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Save Equipment</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Equipment Detail Modal -->
-    <div class="modal fade" id="equipmentDetailModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-info text-white">
-                    <h5 class="modal-title">Equipment Details</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h4 id="detailEquipmentName">Gas Turbine Generator Unit 1</h4>
-                            <div class="d-flex align-items-center mb-3">
-                                <span class="status-badge status-operational me-2" id="detailStatus">Operational</span>
-                                <span class="badge bg-secondary" id="detailId">T8B-001</span>
-                            </div>
-                            
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <small class="text-muted">Category</small>
-                                        <p class="mb-0" id="detailCategory">Lower Generation</p>
-                                    </div>
-                                    <div class="mb-2">
-                                        <small class="text-muted">Location</small>
-                                        <p class="mb-0" id="detailLocation">Turbine Hall A</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <small class="text-muted">Quantity</small>
-                                        <p class="mb-0" id="detailQuantity">1 unit</p>
-                                    </div>
-                                    <div class="mb-2">
-                                        <small class="text-muted">Value</small>
-                                        <p class="mb-0" id="detailValue">$15,000,000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between">
-                                    <small class="text-muted">Condition</small>
-                                    <small id="detailConditionValue">85%</small>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar" id="detailConditionBar" 
-                                         role="progressbar" style="width: 85%; background-color: #2d9d78"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <small class="text-muted">Last Maintenance</small>
-                                        <p class="mb-0" id="detailLastMaintenance">2024-05-15</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <small class="text-muted">Next Maintenance</small>
-                                        <p class="mb-0 fw-bold" id="detailNextMaintenance">2024-08-15</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card bg-light">
-                                <div class="card-body">
-                                    <h6 class="card-title">Maintenance History</h6>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item bg-light py-2">2024-05-15: Routine inspection</li>
-                                        <li class="list-group-item bg-light py-2">2024-02-10: Parts replacement</li>
-                                        <li class="list-group-item bg-light py-2">2023-11-05: Performance test</li>
-                                        <li class="list-group-item bg-light py-2">2023-08-15: Major overhaul</li>
-                                    </ul>
+                                    <label asp-for="Equipment.InstalledDate" class="form-label">Installed Date</label>
+                                    <input asp-for="Equipment.InstalledDate" type="date" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Equipment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Equipment Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title">Edit Equipment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" asp-page-handler="Edit">
+                    <input type="hidden" asp-for="Equipment.Id" id="editId" />
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Name" class="form-label">Equipment Name</label>
+                                    <input asp-for="Equipment.Name" id="editName" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Type" class="form-label">Equipment Type</label>
+                                    <select asp-for="Equipment.Type" id="editType" class="form-select" required>
+                                        <option value="">Select Type</option>
+                                        <option>Generator</option>
+                                        <option>Transformer</option>
+                                        <option>Turbine</option>
+                                        <option>Switchgear</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Location" class="form-label">Location</label>
+                                    <input asp-for="Equipment.Location" id="editLocation" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Status" class="form-label">Status</label>
+                                    <select asp-for="Equipment.Status" id="editStatus" class="form-select" required>
+                                        <option value="">Select Status</option>
+                                        <option value="operational">Operational</option>
+                                        <option value="maintenance">Maintenance</option>
+                                        <option value="critical">Critical</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Quantity" class="form-label">Quantity</label>
+                                    <input asp-for="Equipment.Quantity" id="editQuantity" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Value" class="form-label">Value ($)</label>
+                                    <input asp-for="Equipment.Value" id="editValue" type="number" class="form-control"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.Conditions" class="form-label">Condition (%)</label>
+                                    <input asp-for="Equipment.Conditions" id="editCondition" type="number" min="0"
+                                        max="100" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Equipment.InstalledDate" class="form-label">Installed Date</label>
+                                    <input asp-for="Equipment.InstalledDate" id="editInstalledDate" type="date"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-warning">Update Equipment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Equipment Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">ID</dt>
+                        <dd class="col-sm-8" id="detailId"></dd>
+
+                        <dt class="col-sm-4">Name</dt>
+                        <dd class="col-sm-8" id="detailName"></dd>
+
+                        <dt class="col-sm-4">Type</dt>
+                        <dd class="col-sm-8" id="detailType"></dd>
+
+                        <dt class="col-sm-4">Location</dt>
+                        <dd class="col-sm-8" id="detailLocation"></dd>
+
+                        <dt class="col-sm-4">Quantity</dt>
+                        <dd class="col-sm-8" id="detailQuantity"></dd>
+
+                        <dt class="col-sm-4">Value</dt>
+                        <dd class="col-sm-8" id="detailValue"></dd>
+
+                        <dt class="col-sm-4">Condition</dt>
+                        <dd class="col-sm-8" id="detailCondition"></dd>
+
+                        <dt class="col-sm-4">Installed Date</dt>
+                        <dd class="col-sm-8" id="detailInstalledDate"></dd>
+                    </dl>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning">
-                        <i class="fas fa-wrench me-1"></i> Schedule Maintenance
-                    </button>
                 </div>
             </div>
         </div>
@@ -564,443 +565,102 @@
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Sample data for the application (in a real app, this would come from a database)
-        const equipmentData = [
-            {
-                id: "T8B-001",
-                name: "Gas Turbine Generator Unit 1",
-                status: "operational",
-                category: "Generation",
-                location: "Turbine Hall A",
-                quantity: "1 unit",
-                value: "$15,000,000",
-                nextMaintenance: "2024-08-15",
-                lastMaintenance: "2024-05-15",
-                condition: 85
-            },
-            {
-                id: "T8B-002",
-                name: "Steam Turbine Unit 2",
-                status: "maintenance",
-                category: "Generation",
-                location: "Turbine Hall B",
-                quantity: "1 unit",
-                value: "$12,000,000",
-                nextMaintenance: "2024-07-01",
-                lastMaintenance: "2024-06-01",
-                condition: 45
-            },
-            {
-                id: "PUMP-001",
-                name: "Cooling Water Pump",
-                status: "operational",
-                category: "Cooling System",
-                location: "Pump House",
-                quantity: "4 units",
-                value: "$350,000",
-                nextMaintenance: "2024-09-10",
-                lastMaintenance: "2024-06-10",
-                condition: 75
-            },
-            {
-                id: "CHEM-001",
-                name: "Water Treatment Chemicals",
-                status: "critical",
-                category: "Chemicals",
-                location: "Chemical Storage",
-                quantity: "150 kg",
-                value: "$25,000",
-                nextMaintenance: "2024-06-30",
-                lastMaintenance: "2024-04-30",
-                condition: 20
-            },
-            {
-                id: "TRNF-001",
-                name: "Power Transformer 132kV",
-                status: "operational",
-                category: "Electrical",
-                location: "Switchyard",
-                quantity: "3 units",
-                value: "$800,000",
-                nextMaintenance: "2024-10-20",
-                lastMaintenance: "2024-04-20",
-                condition: 90
-            },
-            {
-                id: "SPARE-001",
-                name: "Turbine Blade Set",
-                status: "operational",
-                category: "Spare Parts",
-                location: "Parts Warehouse",
-                quantity: "2 sets",
-                value: "$120,000",
-                nextMaintenance: "2024-11-15",
-                lastMaintenance: "2024-05-15",
-                condition: 95
-            }
-        ];
+        // Show success message after form submission
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
 
-        const maintenanceData = [
-            {
-                equipment: "Steam Turbine Unit 2",
-                id: "TRB-002",
-                location: "Turbine Hall B",
-                nextDate: "2024-07-01",
-                lastDate: "2024-06-01",
-                status: "Scheduled",
-                type: "Routine Inspection"
-            },
-            {
-                equipment: "Gas Turbine Generator Unit 1",
-                id: "TRB-001",
-                location: "Turbine Hall A",
-                nextDate: "2024-08-15",
-                lastDate: "2024-05-15",
-                status: "Scheduled",
-                type: "Performance Test"
-            },
-            {
-                equipment: "Cooling Water Pump",
-                id: "PUMP-001",
-                location: "Pump House",
-                nextDate: "2024-09-10",
-                lastDate: "2024-06-10",
-                status: "Pending",
-                type: "Parts Replacement"
-            },
-            {
-                equipment: "Power Transformer 132kV",
-                id: "TRNF-001",
-                location: "Switchyard",
-                nextDate: "2024-10-20",
-                lastDate: "2024-04-20",
-                status: "Scheduled",
-                type: "Electrical Testing"
-            }
-        ];
+            if (message) {
+                document.getElementById('toastMessage').textContent = message;
+                const toast = new bootstrap.Toast(document.getElementById('notificationToast'));
+                toast.show();
 
-        const alertData = [
-            {
-                equipment: "Gas Turbine Generator Unit 1",
-                issue: "Low stock",
-                current: "1 unit",
-                critical: "1 unit",
-                resolved: false,
-                priority: "High"
-            },
-            {
-                equipment: "Steam Turbine Unit 2",
-                issue: "Low stock",
-                current: "1 unit",
-                critical: "1 unit",
-                resolved: false,
-                priority: "High"
-            },
-            {
-                equipment: "Cooling Water Pump",
-                issue: "Low stock",
-                current: "4 units",
-                critical: "10 units",
-                resolved: false,
-                priority: "Medium"
-            },
-            {
-                equipment: "Water Treatment Chemicals",
-                issue: "Low stock",
-                current: "150 kg",
-                critical: "200 kg",
-                resolved: false,
-                priority: "Medium"
+                // Clear the message from URL
+                const url = new URL(window.location);
+                url.searchParams.delete('message');
+                window.history.replaceState({}, document.title, url.toString());
             }
-        ];
+        };
 
-        // Function to render equipment cards
-        function renderEquipmentCards(equipmentList) {
-            const container = document.getElementById('equipmentGrid');
-            container.innerHTML = '';
-            
-            if (equipmentList.length === 0) {
-                container.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
-                        <h4>No equipment found</h4>
-                        <p class="text-muted">Try adjusting your search or filters</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEquipmentModal">
-                            <i class="fas fa-plus me-1"></i> Add Equipment
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            
-            equipmentList.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'col-12 col-md-6 col-lg-4';
-                card.innerHTML = `
-                    <div class="card equipment-card h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h5 class="card-title mb-0">${item.name}</h5>
-                                <span class="status-badge status-${item.status}">${item.status}</span>
-                            </div>
-                            <p class="card-text text-muted mb-2"><strong>ID:</strong> ${item.id}</p>
-                            <p class="card-text mb-2"><strong>Category:</strong> ${item.category}</p>
-                            <p class="card-text mb-2"><strong>Location:</strong> ${item.location}</p>
-                            <p class="card-text mb-2"><strong>Quantity:</strong> ${item.quantity}</p>
-                            <p class="card-text mb-3"><strong>Value:</strong> ${item.value}</p>
-                            <p class="card-text mb-1"><strong>Next Maintenance:</strong> ${item.nextMaintenance}</p>
-                            
-                            <div class="d-flex justify-content-between align-items-center mb-2 mt-3">
-                                <small class="text-muted">Condition</small>
-                                <small>${item.condition}%</small>
-                            </div>
-                            <div class="progress mb-4">
-                                <div class="progress-bar" 
-                                     role="progressbar" 
-                                     style="width: ${item.condition}%; background-color: ${getConditionColor(item.condition)}" 
-                                     aria-valuenow="${item.condition}" 
-                                     aria-valuemin="0" 
-                                     aria-valuemax="100">
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-sm btn-outline-primary" onclick="showEquipmentDetail('${item.id}')">
-                                    <i class="fas fa-info-circle me-1"></i> Details
-                                </button>
-                                <button class="btn btn-sm btn-outline-warning">
-                                    <i class="fas fa-wrench me-1"></i> Maintain
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger">
-                                    <i class="fas fa-bell me-1"></i> Alert
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
+        // Show equipment details
+        function showDetail(id, name, type, location, quantity, value, condition, installedDate) {
+            document.getElementById('detailId').textContent = id;
+            document.getElementById('detailName').textContent = name;
+            document.getElementById('detailType').textContent = type;
+            document.getElementById('detailLocation').textContent = location;
+            document.getElementById('detailQuantity').textContent = quantity;
+            document.getElementById('detailValue').textContent = '$' + parseFloat(value).toLocaleString();
+            document.getElementById('detailCondition').textContent = condition + '%';
+            document.getElementById('detailInstalledDate').textContent = installedDate;
         }
 
-        // Function to render maintenance schedule
-        function renderMaintenanceSchedule(maintenanceList) {
-            const container = document.getElementById('maintenanceList');
-            container.innerHTML = '';
-            
-            if (maintenanceList.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-4">
-                        <i class="fas fa-calendar-times fa-2x text-muted mb-3"></i>
-                        <h5>No maintenance scheduled</h5>
-                        <p class="text-muted">Add new maintenance schedule to get started</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            maintenanceList.forEach(item => {
-                const maintenanceItem = document.createElement('div');
-                maintenanceItem.className = 'maintenance-item';
-                maintenanceItem.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <h5>${item.equipment}</h5>
-                            <p class="mb-1">${item.id} - ${item.location}</p>
-                            <span class="badge bg-secondary">${item.type}</span>
-                        </div>
-                        <span class="badge ${item.status === 'Scheduled' ? 'bg-success' : 'bg-warning'}">${item.status}</span>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-calendar-check me-2 text-success"></i>
-                                <div>
-                                    <small class="text-muted d-block">Next Maintenance</small>
-                                    <strong>${item.nextDate}</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-history me-2 text-secondary"></i>
-                                <div>
-                                    <small class="text-muted d-block">Last Maintenance</small>
-                                    <strong>${item.lastDate}</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3 d-flex justify-content-end">
-                        <button class="btn btn-sm btn-outline-success me-2">
-                            <i class="fas fa-check-circle me-1"></i> Complete
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary me-2">
-                            <i class="fas fa-calendar-alt me-1"></i> Reschedule
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="fas fa-trash-alt me-1"></i> Cancel
-                        </button>
-                    </div>
-                `;
-                container.appendChild(maintenanceItem);
-            });
+        // Load edit form with equipment data
+        function loadEditForm(id, name, type, location, quantity, value, condition, status, installedDate) {
+            document.getElementById('editId').value = id;
+            document.getElementById('editName').value = name;
+            document.getElementById('editType').value = type;
+            document.getElementById('editLocation').value = location;
+            document.getElementById('editQuantity').value = quantity;
+            document.getElementById('editValue').value = value;
+            document.getElementById('editCondition').value = condition;
+            document.getElementById('editStatus').value = status;
+            document.getElementById('editInstalledDate').value = installedDate;
         }
 
-        // Function to render alerts
-        function renderAlerts(alertList) {
-            const container = document.getElementById('alertList');
-            container.innerHTML = '';
-            
-            if (alertList.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-4">
-                        <i class="fas fa-check-circle fa-2x text-success mb-3"></i>
-                        <h5>No critical alerts</h5>
-                        <p class="text-muted">All systems are operating normally</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            alertList.forEach((item, index) => {
-                const alertItem = document.createElement('div');
-                alertItem.className = 'alert-item';
-                alertItem.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div>
-                            <h5 class="mb-1">${item.equipment}</h5>
-                            <p class="mb-0">${item.issue}: ${item.current} (Critical: ${item.critical})</p>
-                        </div>
-                        <span class="badge ${item.priority === 'High' ? 'bg-danger' : 'bg-warning'}">${item.priority} Priority</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="alert-${index}" ${item.resolved ? 'checked' : ''}>
-                            <label class="form-check-label" for="alert-${index}">
-                                Mark as resolved
-                            </label>
-                        </div>
-                        <div>
-                            <button class="btn btn-sm btn-outline-danger me-2">
-                                <i class="fas fa-bell me-1"></i> Notify Team
-                            </button>
-                            <button class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-file-alt me-1"></i> Create Order
-                            </button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(alertItem);
-                
-                // Add event listener for checkbox
-                const checkbox = alertItem.querySelector(`#alert-${index}`);
-                checkbox.addEventListener('change', function() {
-                    alertData[index].resolved = this.checked;
-                    if (this.checked) {
-                        alertItem.style.opacity = '0.7';
-                        alertItem.style.borderLeftColor = '#28a745';
-                    } else {
-                        alertItem.style.opacity = '1';
-                        alertItem.style.borderLeftColor = 'var(--accent)';
-                    }
-                });
-            });
-        }
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.equipment-card');
 
-        // Function to update dashboard stats
-        function updateDashboardStats() {
-            document.getElementById('totalItems').textContent = equipmentData.length;
-            
-            const operationalCount = equipmentData.filter(e => e.status === 'operational').length;
-            document.getElementById('operationalCount').textContent = operationalCount;
-            
-            const criticalCount = equipmentData.filter(e => e.status === 'critical').length + 
-                                 alertData.filter(a => !a.resolved).length;
-            document.getElementById('criticalCount').textContent = criticalCount;
-            
-            // Calculate total value (simplified)
-            const totalValue = equipmentData.reduce((sum, item) => {
-                const value = parseFloat(item.value.replace(/[^0-9.]/g, ''));
-                return sum + value;
-            }, 0);
-            document.getElementById('totalValue').textContent = `$${(totalValue / 1000000).toFixed(1)}M`;
-        }
+            cards.forEach(card => {
+                const name = card.querySelector('.card-title').textContent.toLowerCase();
+                const id = card.querySelector('.card-text:nth-child(2)').textContent.split(': ')[1].toLowerCase();
 
-        // Helper function to get condition color
-        function getConditionColor(percent) {
-            if (percent >= 80) return '#2d9d78';
-            if (percent >= 50) return '#e9b949';
-            return '#e63946';
-        }
-
-        // Function to show equipment details
-        function showEquipmentDetail(equipmentId) {
-            const equipment = equipmentData.find(e => e.id === equipmentId);
-            if (equipment) {
-                document.getElementById('detailEquipmentName').textContent = equipment.name;
-                document.getElementById('detailId').textContent = equipment.id;
-                document.getElementById('detailStatus').textContent = equipment.status;
-                document.getElementById('detailStatus').className = `status-badge status-${equipment.status}`;
-                document.getElementById('detailCategory').textContent = equipment.category;
-                document.getElementById('detailLocation').textContent = equipment.location;
-                document.getElementById('detailQuantity').textContent = equipment.quantity;
-                document.getElementById('detailValue').textContent = equipment.value;
-                document.getElementById('detailConditionValue').textContent = `${equipment.condition}%`;
-                document.getElementById('detailConditionBar').style.width = `${equipment.condition}%`;
-                document.getElementById('detailConditionBar').style.backgroundColor = getConditionColor(equipment.condition);
-                document.getElementById('detailLastMaintenance').textContent = equipment.lastMaintenance;
-                document.getElementById('detailNextMaintenance').textContent = equipment.nextMaintenance;
-                
-                const modal = new bootstrap.Modal(document.getElementById('equipmentDetailModal'));
-                modal.show();
-            }
-        }
-
-        // Search and filter functionality
-        function filterEquipment() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const category = document.getElementById('categoryFilter').value;
-            const status = document.getElementById('statusFilter').value;
-            
-            const filteredEquipment = equipmentData.filter(item => {
-                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
-                                      item.id.toLowerCase().includes(searchTerm);
-                const matchesCategory = category ? item.category === category : true;
-                const matchesStatus = status ? item.status === status : true;
-                
-                return matchesSearch && matchesCategory && matchesStatus;
-            });
-            
-            renderEquipmentCards(filteredEquipment);
-        }
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            renderEquipmentCards(equipmentData);
-            renderMaintenanceSchedule(maintenanceData);
-            renderAlerts(alertData);
-            updateDashboardStats();
-            
-            // Add event listeners for filters
-            document.getElementById('searchInput').addEventListener('input', filterEquipment);
-            document.getElementById('categoryFilter').addEventListener('change', filterEquipment);
-            document.getElementById('statusFilter').addEventListener('change', filterEquipment);
-        });
-
-        // Simulate data updates (in a real app, this would come from the server)
-        setInterval(() => {
-            // Randomly update some equipment condition values
-            equipmentData.forEach(equip => {
-                if (Math.random() > 0.7) {
-                    const change = Math.floor(Math.random() * 5) - 2;
-                    equip.condition = Math.max(10, Math.min(100, equip.condition + change));
+                if (name.includes(searchTerm) || id.includes(searchTerm)) {
+                    card.closest('.col-12').style.display = 'block';
+                } else {
+                    card.closest('.col-12').style.display = 'none';
                 }
             });
-            
-            // Update the display
-            renderEquipmentCards(equipmentData);
-            updateDashboardStats();
-        }, 10000); // Update every 10 seconds
+        });
+
+        // Filter by category
+        document.getElementById('categoryFilter').addEventListener('change', function () {
+            const category = this.value;
+            filterEquipment(category, 'category');
+        });
+
+        // Filter by status
+        document.getElementById('statusFilter').addEventListener('change', function () {
+            const status = this.value;
+            filterEquipment(status, 'status');
+        });
+
+        function filterEquipment(value, type) {
+            const cards = document.querySelectorAll('.equipment-card');
+
+            cards.forEach(card => {
+                const cardValue = type === 'category'
+                    ? card.querySelector('.card-text:nth-child(3)').textContent.split(': ')[1].toLowerCase()
+                    : card.querySelector('.status-badge').textContent.toLowerCase();
+
+                if (!value || cardValue === value.toLowerCase()) {
+                    card.closest('.col-12').style.display = 'block';
+                } else {
+                    card.closest('.col-12').style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
+
 </html>
+
+@functions {
+    public string GetConditionColor(int percent)
+    {
+        if (percent >= 80) return "#2d9d78";
+        if (percent >= 50) return "#e9b949";
+        return "#e63946";
+    }
+}

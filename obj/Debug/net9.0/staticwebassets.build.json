@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "q4ahxmDvv+q7QOwNG2/1aGlVwSyOFo0JaDFIYcraYwk=",
+  "Hash": "ECI3/7+C8M/A1oW/voUvesXmupqRZZxEfqgBpX3eI1Y=",
   "Source": "PlantSync",
   "BasePath": "_content/PlantSync",
   "Mode": "Default",
@@ -1298,12 +1298,12 @@
       "OriginalItemSpec": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-lugek5hnai.gz",
+      "Identity": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-suipyobm6f.gz",
       "SourceId": "PlantSync",
       "SourceType": "Discovered",
       "ContentRoot": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/PlantSync",
-      "RelativePath": "css/site#[.{fingerprint=lugek5hnai}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=suipyobm6f}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1312,8 +1312,8 @@
       "RelatedAsset": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/wwwroot/css/site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "lb0jssabxu",
-      "Integrity": "n4te0btuR7bRk4mRh2N5HuBqCrDu5bjitpFCR/Qw63g=",
+      "Fingerprint": "uu951rbr5v",
+      "Integrity": "Jh5E6vGTHk8twIpV9mMadNnpcpRUiYA/v2WhQUSic3o=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/wwwroot/css/site.css"
@@ -1417,8 +1417,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "lugek5hnai",
-      "Integrity": "zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo=",
+      "Fingerprint": "suipyobm6f",
+      "Integrity": "tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
@@ -2729,12 +2729,12 @@
   "Endpoints": [
     {
       "Route": "css/site.css",
-      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-lugek5hnai.gz",
+      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-suipyobm6f.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003194888179"
+          "Quality": "0.000768049155"
         }
       ],
       "ResponseHeaders": [
@@ -2744,15 +2744,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "312"
+          "Value": "1301"
         },
         {
           "Name": "ETag",
-          "Value": "\"n4te0btuR7bRk4mRh2N5HuBqCrDu5bjitpFCR/Qw63g=\""
+          "Value": "\"Jh5E6vGTHk8twIpV9mMadNnpcpRUiYA/v2WhQUSic3o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 10:52:48 GMT"
+          "Value": "Tue, 24 Jun 2025 18:11:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2772,13 +2772,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo=\""
+          "Value": "W/\"tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo="
+          "Value": "sha256-tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA="
         }
       ]
     },
@@ -2793,7 +2793,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "637"
+          "Value": "4288"
         },
         {
           "Name": "Content-Type",
@@ -2801,11 +2801,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo=\""
+          "Value": "\"tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 10:52:48 GMT"
+          "Value": "Tue, 24 Jun 2025 18:11:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2815,13 +2815,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo="
+          "Value": "sha256-tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-lugek5hnai.gz",
+      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-suipyobm6f.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2830,7 +2830,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "312"
+          "Value": "1301"
         },
         {
           "Name": "Content-Type",
@@ -2838,11 +2838,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n4te0btuR7bRk4mRh2N5HuBqCrDu5bjitpFCR/Qw63g=\""
+          "Value": "\"Jh5E6vGTHk8twIpV9mMadNnpcpRUiYA/v2WhQUSic3o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 10:52:48 GMT"
+          "Value": "Tue, 24 Jun 2025 18:11:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2860,18 +2860,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-n4te0btuR7bRk4mRh2N5HuBqCrDu5bjitpFCR/Qw63g="
+          "Value": "sha256-Jh5E6vGTHk8twIpV9mMadNnpcpRUiYA/v2WhQUSic3o="
         }
       ]
     },
     {
-      "Route": "css/site.lugek5hnai.css",
-      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-lugek5hnai.gz",
+      "Route": "css/site.suipyobm6f.css",
+      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-suipyobm6f.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003194888179"
+          "Quality": "0.000768049155"
         }
       ],
       "ResponseHeaders": [
@@ -2881,15 +2881,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "312"
+          "Value": "1301"
         },
         {
           "Name": "ETag",
-          "Value": "\"n4te0btuR7bRk4mRh2N5HuBqCrDu5bjitpFCR/Qw63g=\""
+          "Value": "\"Jh5E6vGTHk8twIpV9mMadNnpcpRUiYA/v2WhQUSic3o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 10:52:48 GMT"
+          "Value": "Tue, 24 Jun 2025 18:11:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2909,13 +2909,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo=\""
+          "Value": "W/\"tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "lugek5hnai"
+          "Value": "suipyobm6f"
         },
         {
           "Name": "label",
@@ -2923,12 +2923,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo="
+          "Value": "sha256-tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA="
         }
       ]
     },
     {
-      "Route": "css/site.lugek5hnai.css",
+      "Route": "css/site.suipyobm6f.css",
       "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/wwwroot/css/site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2938,7 +2938,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "637"
+          "Value": "4288"
         },
         {
           "Name": "Content-Type",
@@ -2946,11 +2946,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo=\""
+          "Value": "\"tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 10:52:48 GMT"
+          "Value": "Tue, 24 Jun 2025 18:11:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2960,7 +2960,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "lugek5hnai"
+          "Value": "suipyobm6f"
         },
         {
           "Name": "label",
@@ -2968,13 +2968,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo="
+          "Value": "sha256-tB1a19DAZeVBCBRFeP975hGd4jMHWCKWwWv2AC1IWlA="
         }
       ]
     },
     {
-      "Route": "css/site.lugek5hnai.css.gz",
-      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-lugek5hnai.gz",
+      "Route": "css/site.suipyobm6f.css.gz",
+      "AssetFile": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/Debug/net9.0/compressed/zgakf6cqqk-suipyobm6f.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2983,7 +2983,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "312"
+          "Value": "1301"
         },
         {
           "Name": "Content-Type",
@@ -2991,11 +2991,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n4te0btuR7bRk4mRh2N5HuBqCrDu5bjitpFCR/Qw63g=\""
+          "Value": "\"Jh5E6vGTHk8twIpV9mMadNnpcpRUiYA/v2WhQUSic3o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 10:52:48 GMT"
+          "Value": "Tue, 24 Jun 2025 18:11:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3013,7 +3013,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "lugek5hnai"
+          "Value": "suipyobm6f"
         },
         {
           "Name": "label",
@@ -3021,7 +3021,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-n4te0btuR7bRk4mRh2N5HuBqCrDu5bjitpFCR/Qw63g="
+          "Value": "sha256-Jh5E6vGTHk8twIpV9mMadNnpcpRUiYA/v2WhQUSic3o="
         }
       ]
     },
