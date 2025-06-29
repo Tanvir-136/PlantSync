@@ -724,11 +724,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/PlantSync.csproj",
+      "projectUniqueName": "/mnt/1DDA6D775041A90F/PlantSync/PlantSync.csproj",
       "projectName": "PlantSync",
-      "projectPath": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/PlantSync.csproj",
+      "projectPath": "/mnt/1DDA6D775041A90F/PlantSync/PlantSync.csproj",
       "packagesPath": "/home/tanvir/.nuget/packages/",
-      "outputPath": "/run/media/tanvir/1DDA6D775041A90F/project/PlantSync/obj/",
+      "outputPath": "/mnt/1DDA6D775041A90F/PlantSync/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/tanvir/.nuget/NuGet/NuGet.Config"

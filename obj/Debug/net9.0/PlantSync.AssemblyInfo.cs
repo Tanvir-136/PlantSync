@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlantSync")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+364f4b5eac13d2b9caea052e4e9c69c096bf7580")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlantSync")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlantSync")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
